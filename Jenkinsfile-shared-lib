@@ -1,0 +1,7 @@
+@Library('lab_shared_lib') _
+
+mvnBuild(
+  mvnBuildArgs: '-DskipTests=true -Dmaven.javadoc.skip=true -Dcheckstyle.skip=true -B -e -U',
+  mvnTestArgs: '-X',
+  mvnITArgs: '-Dskip.unit.tests=true -B -e -U -X'
+)
