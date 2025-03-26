@@ -21,9 +21,9 @@ pipeline {
 
         stage('Build') {
             steps {
-                withMaven(maven: 'MAVEN_ENV') {
+                //withMaven(maven: 'MAVEN_ENV') {
                     sh "mvn clean install -DskipTests=true -Dmaven.javadoc.skip=true -Dcheckstyle.skip=true ${MAVEN_ARGS}"
-                }
+                //}
             }
         }
 
