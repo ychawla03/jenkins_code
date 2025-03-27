@@ -10,6 +10,8 @@ void setBuildStatus(String message, String state) {
   ]);
 }
 
+//MAVEN_ENV needs to be set in Jenkins - Manage jenkins - Tools - under maven - key should be
+//there should be MAVEN_ENV
 pipeline {
   agent any
 
@@ -38,7 +40,7 @@ pipeline {
         stage('Integration tests') {
            steps {
                 withMaven(maven: 'MAVEN_ENV') {
-                    sh "mvn clean verify -Dskip.unit.tests=true ${MAVEN_ARGS}"
+                    bat "mvn clean verify -Dskip.unit.tests=true ${MAVEN_ARGS}"
                 }
            }
           post {
@@ -50,7 +52,7 @@ pipeline {
 
         stage('Code quality - sonar') {
             steps {
-                sh """
+                bat """
                 echo "Running sonar Analysis"
                 """
 			//	withMaven(maven: 'MAVEN_ENV') {
@@ -62,7 +64,7 @@ pipeline {
 
         stage('OWASP Dependency-Check Vulnerabilities') {
             steps {
-				sh """
+				bat """
                 echo "OWASP Dependency-Check Vulnerabilities"
                 """
             }
