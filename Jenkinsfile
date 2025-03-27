@@ -21,16 +21,16 @@ pipeline {
 
         stage('Build') {
             steps {
-                //withMaven(maven: 'MAVEN_ENV') {
-                    sh "mvn clean install -DskipTests=true -Dmaven.javadoc.skip=true -Dcheckstyle.skip=true ${MAVEN_ARGS}"
-                //}
+                withMaven(maven: 'MAVEN_ENV') {
+                    bat "mvn clean install -DskipTests=true -Dmaven.javadoc.skip=true -Dcheckstyle.skip=true ${MAVEN_ARGS}"
+                }
             }
         }
 
         stage('Unit tests') {
             steps {
                 withMaven(maven: 'MAVEN_ENV') {
-                    sh "mvn clean test-compile surefire:test ${MAVEN_ARGS}"
+                    bat "mvn clean test-compile surefire:test ${MAVEN_ARGS}"
                 }
             }
         }
